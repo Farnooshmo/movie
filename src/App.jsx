@@ -4,7 +4,7 @@ import AddVideoForm from "./components/AddVideoForm";
 import Video from "./components/Video";
 import Header from "./components/Header";
 import "./App.css";
-import "./components/AddVideoForm.css";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
@@ -16,7 +16,7 @@ const App = () => {
   const fetchVideos = async () => {
     try {
       const res = await fetch(
-        "https://full-stack-project-assessment-spzs.onrender.com/videos"
+        "https://movie-txmq.onrender.com/videos"
       );
       const data = await res.json();
       setVideos(data);
@@ -28,7 +28,7 @@ const App = () => {
   const handleAddVideo = async (newVideo) => {
     try {
       const res = await fetch(
-        "https://full-stack-project-assessment-spzs.onrender.com/videos",
+        "https://movie-txmq.onrender.com/videos",
         {
           method: "POST",
           headers: {
@@ -47,7 +47,7 @@ const App = () => {
   const handleUpVote = async (videoId) => {
     try {
       await fetch(
-        `https://full-stack-project-assessment-spzs.onrender.com/videos/${videoId}/upvote`,
+        `https://movie-txmq.onrender.com/videos/${videoId}/upvote`,
         {
           method: "PUT",
           headers: {
@@ -68,7 +68,7 @@ const App = () => {
   const handleDownVote = async (videoId) => {
     try {
       await fetch(
-        `https://full-stack-project-assessment-spzs.onrender.com/videos/${videoId}/downvote`,
+        `https://movie-txmq.onrender.com/videos/${videoId}/downvote`,
         {
           method: "PUT",
           headers: {
@@ -89,7 +89,7 @@ const App = () => {
   const handleRemoveVideo = async (videoId) => {
     try {
       await fetch(
-        `https://full-stack-project-assessment-spzs.onrender.com/videos/${videoId}`,
+        `https://movie-txmq.onrender.com/videos/${videoId}`,
         {
           method: "DELETE",
         }
@@ -121,6 +121,7 @@ const App = () => {
       ) : (
         <p>Loading videos...</p>
       )}
+      <Footer />
     </div>
   );
 };
