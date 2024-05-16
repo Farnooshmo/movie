@@ -1,5 +1,4 @@
-import React from "react";
-import "./Video.css";
+
 
 const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
   return (
