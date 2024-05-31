@@ -106,8 +106,8 @@ const App = () => {
     <div className="app">
       <Header />
       <AddVideoForm onAddVideo={handleAddVideo} />
-      {videos.length > 0 ? (
-        videos.map((video) => (
+    
+       {videos.map((video) => (
           <Video
             key={video.id}
             title={video.title}
@@ -117,10 +117,8 @@ const App = () => {
             onDownVote={() => handleDownVote(video.id)}
             onRemove={() => handleRemoveVideo(video.id)}
           />
-        ))
-      ) : (
-        <p>Loading videos...</p>
-      )}
+        ))}
+      
       <Footer />
     </div>
   );
