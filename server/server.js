@@ -1,18 +1,22 @@
 // @ts-check
+/* eslint-disable no-undef */
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
-require("dotenv").config();
-const port = process.env.PORT || 4000;
 const app = express();
+const serverPort = 4000;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  user: process.env.USERNAME, 
+  host: process.env.HOSTNAME,
+  database: process.env.DATABASE, 
+  password: process.env.DB_PASSWORD,
+  port: 5432, 
 });
-
+// const allowedOrigins = ['https://movie-farnoosh.netlify.app', 'http://localhost:5173'];
+// app.use(cors({
+//   origin: allowedOrigins
+// }));
 app.use(cors());
 app.use(express.json());
 
@@ -37,6 +41,7 @@ app.post("/videos", async (req, res) => {
       "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING *",
       [title, url, 0]
     );
+    
 
     res.status(201).json(rows[0]);
   } catch (error) {
@@ -103,6 +108,6 @@ app.put("/videos/:id/downvote", async (req, res) => {
   }
 });
 
-app.listen(port, undefined, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(serverPort, () => {
+  console.log(`Server is running on port ${serverPort}`);
 });
