@@ -1,33 +1,43 @@
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
   return (
     <div className="video_wrapper">
-      <h2 className="video_title">Title:{title}</h2>
+      <h2 className="video_title">Title: {title}</h2>
       <iframe
         width="560"
         height="315"
         src={url.replace("watch?v=", "embed/")}
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
 
-      <div>Votes:{rating}</div>
+      <div>Votes: {rating}</div>
       <div className="votes_btn_wrap">
-        <button onClick={onUpVote} className="up_vote">
+        <button onClick={onUpVote} className="up_vote" aria-label="Upvote">
           ♡
         </button>
-        <button onClick={onDownVote} className="down_vote">
+        <button onClick={onDownVote} className="down_vote" aria-label="Downvote">
           💔
         </button>
-        <button onClick={onRemove} className="delete">
+        <button onClick={onRemove} className="delete" aria-label="Remove">
           ␡
         </button>
       </div>
     </div>
   );
+};
+
+Video.propTypes = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  onUpVote: PropTypes.func.isRequired,
+  onDownVote: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default Video;
