@@ -1,136 +1,108 @@
+// @ts-check
 const express = require("express");
 const cors = require("cors");
-const app = express();
-const port = process.env.PORT || 3000;
-const { Client } = require("pg");
+const { Pool } = require("pg");
 require("dotenv").config();
+const port = process.env.PORT || 4000;
+const app = express();
 
-const client = new Client({
-  connectionString: process.env.DB_URL,
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
-  
 });
 
-app.use(cors({
-    origin: 'https://movie-farnoosh.netlify.app/',
-    methods: ['GET', 'POST'], // Specify allowed HTTP methods
-    allowedHeaders: ['Content-Type'], // Specify allowed headers
-  }));
+app.use(cors());
 app.use(express.json());
 
-async function connectToDatabase() {
-  try {
-    await client.connect();
-  } catch (error) {
-    console.error("Error connecting to the database:", error);
-  }
-}
-
-//  Get all of the videos
 app.get("/videos", async (req, res) => {
   try {
-    const query = "SELECT * FROM videos";
-    const result = await client.query(query);
-    const videos = result.rows;
-    res.status(200).json(videos);
+    const { rows } = await pool.query("SELECT * FROM videos");
+    res.status(200).json(rows);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to retrieve videos." });
   }
 });
 
-//  Add a video to the API.
 app.post("/videos", async (req, res) => {
   try {
     const { title, url } = req.body;
-    const rating = 0;
-    const query =
-      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING *";
-    const values = [title, url, rating];
-    const result = await client.query(query, values);
-    const newVideo = result.rows[0];
-    res.status(201).json(newVideo);
+    if (!title || !url) {
+      return res.status(400).json({ error: "Title and URL are required" });
+    }
+
+    const { rows } = await pool.query(
+      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING *",
+      [title, url, 0]
+    );
+
+    res.status(201).json(rows[0]);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ error: "Something went wrong. Please try again later." });
+    res.status(500).json({ error: "Something went wrong. Please try again later." });
   }
 });
 
-// Get the video with the ID
-
 app.get("/videos/:id", async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    const query = "SELECT * FROM videos WHERE id = $1";
-    const values = [id];
-    const result = await client.query(query, values);
-    const video = result.rows[0];
+    const { id } = req.params;
+    const { rows } = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
 
-    if (video) {
-      res.json(video);
-    } else {
+    if (rows.length === 0) {
       res.status(404).json({ result: "failure", message: "Video not found" });
+    } else {
+      res.json(rows[0]);
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({ result: "failure", message: "Error retrieving video" });
   }
 });
-// Deletes the video with the ID
+
 app.delete("/videos/:id", async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    const query = "DELETE FROM videos WHERE id = $1";
-    const values = [id];
-    await client.query(query, values);
+    const { id } = req.params;
+    await pool.query("DELETE FROM videos WHERE id = $1", [id]);
+
     res.json({ result: "success", message: "Video deleted" });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ result: "failure", message: "Video could not be deleted" });
+    res.status(500).json({ result: "failure", message: "Video could not be deleted" });
   }
 });
 
-// Upvote a video by ID
 app.put("/videos/:id/upvote", async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    const query =
-      "UPDATE videos SET rating = rating + 1 WHERE id = $1 RETURNING *";
-    const values = [id];
-    const result = await client.query(query, values);
-    const updatedVideo = result.rows[0];
-    res.json(updatedVideo);
+    const { id } = req.params;
+    const { rows } = await pool.query(
+      "UPDATE videos SET rating = rating + 1 WHERE id = $1 RETURNING *",
+      [id]
+    );
+
+    res.json(rows[0]);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ result: "failure", message: "Video could not be upvoted" });
+    res.status(500).json({ result: "failure", message: "Video could not be upvoted" });
   }
 });
 
-// Downvote a video by ID
 app.put("/videos/:id/downvote", async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    const query =
-      "UPDATE videos SET rating = rating - 1 WHERE id = $1 RETURNING *";
-    const values = [id];
-    const result = await client.query(query, values);
-    const updatedVideo = result.rows[0];
-    res.json(updatedVideo);
+    const { id } = req.params;
+    const { rows } = await pool.query(
+      "UPDATE videos SET rating = rating - 1 WHERE id = $1 RETURNING *",
+      [id]
+    );
+
+    res.json(rows[0]);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ result: "failure", message: "Video could not be downvoted" });
+    res.status(500).json({ result: "failure", message: "Video could not be downvoted" });
   }
 });
 
-app.listen(port, '0.0.0.0', () => console.log(`Listening on port ${port}`));
-connectToDatabase();
+app.listen(port, undefined, () => {
+  console.log(`Server is running on port ${port}`);
+});
