@@ -7,10 +7,10 @@ const app = express();
 const serverPort = 4000;
 
 const pool = new Pool({
-  user: process.env.USERNAME, 
-  host: process.env.HOSTNAME,
-  database: process.env.DATABASE, 
-  password: process.env.DB_PASSWORD,
+  user:process.env.USER, 
+  host:process.env.HOST,
+  database:process.env.DATABASE, 
+  password:process.env.PASSWORD,
   port: 5432, 
 });
 // const allowedOrigins = ['https://movie-farnoosh.netlify.app', 'http://localhost:5173'];
