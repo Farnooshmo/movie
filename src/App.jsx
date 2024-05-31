@@ -16,7 +16,7 @@ const App = () => {
   const fetchVideos = async () => {
     try {
       const res = await fetch(
-        "https://movie-txmq.onrender.com/videos"
+        "https://movie-7cn3.onrender.com/videos"
       );
       const data = await res.json();
       setVideos(data);
@@ -28,7 +28,7 @@ const App = () => {
   const handleAddVideo = async (newVideo) => {
     try {
       const res = await fetch(
-        "https://movie-txmq.onrender.com/videos",
+        "https://movie-7cn3.onrender.com/videos",
         {
           method: "POST",
           headers: {
@@ -47,7 +47,7 @@ const App = () => {
   const handleUpVote = async (videoId) => {
     try {
       await fetch(
-        `https://movie-txmq.onrender.com/videos/${videoId}/upvote`,
+        `https://movie-7cn3.onrender.com/videos/${videoId}/upvote`,
         {
           method: "PUT",
           headers: {
@@ -68,7 +68,7 @@ const App = () => {
   const handleDownVote = async (videoId) => {
     try {
       await fetch(
-        `https://movie-txmq.onrender.com/videos/${videoId}/downvote`,
+        `https://movie-7cn3.onrender.com/videos/${videoId}/downvote`,
         {
           method: "PUT",
           headers: {
@@ -89,7 +89,7 @@ const App = () => {
   const handleRemoveVideo = async (videoId) => {
     try {
       await fetch(
-        `https://movie-txmq.onrender.com/videos/${videoId}`,
+        `https://movie-7cn3.onrender.com/videos/${videoId}`,
         {
           method: "DELETE",
         }
