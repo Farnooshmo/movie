@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import './Video.css';
 const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
   return (
     <div className="video_wrapper">
