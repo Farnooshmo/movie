@@ -16,7 +16,7 @@ className='iframe'
 
 </iframe>
 
-      <div>Votes: {rating}</div>
+      <div>Liked: {rating}</div>
       <div className="votes_btn_wrap">
         <button onClick={onUpVote} className="up_vote" aria-label="Upvote">
           ♡
