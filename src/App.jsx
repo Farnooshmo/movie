@@ -15,9 +15,12 @@ const App = () => {
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch(
-        "https://movie-7cn3.onrender.com/videos"
-      );
+      const res = await fetch("https://movie-7cn3.onrender.com/videos");
+      
+      if (!res.ok) {
+        throw new Error("Failed to fetch videos");
+      }
+      
       const data = await res.json();
       setVideos(data);
     } catch (err) {
