@@ -1,9 +1,16 @@
 /* ----Video ---- */
 .video_wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px; 
+  padding: 20px; 
+  width: 80%;
+  border: 2px solid red; 
+  border-radius: 10px; 
+}
+
+
   /* ----buttons---- */
   .votes_btn_wrap {
     display: flex;
