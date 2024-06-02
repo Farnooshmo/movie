@@ -1,4 +1,5 @@
 import  { useState, useEffect } from "react";
+import './App.css';
 
 import AddVideoForm from "./components/AddVideoForm";
 import Video from "./components/Video";
