@@ -1,52 +1,77 @@
-/* Parent container for all video cards */
-.video_cards_container {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-  width: 100%;
-  height: 100vh; 
-  padding: 20px; 
-  box-sizing: border-box; 
-}
-
-/* Video wrapper (single card) */
 .video_wrapper {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px; 
-  padding: 20px; 
-  width: 80%; 
-  max-width: 500px; 
-  border: 2px solid red; 
-  border-radius: 10px; 
-  box-sizing: border-box; 
+  text-align: center;
 }
 
-/* Iframe */
+.video_title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
 .iframe {
   width: 100%;
-  height: auto;
-  max-width: 100%; 
-  border: 0; 
+  height: 0;
+  padding-bottom: 56.25%;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Buttons */
+.iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .votes_btn_wrap {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 2px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.up_vote, .down_vote, .delete {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding: 0;
-  font-size: 29px;
-  background-color: white;
+.votes_btn_wrap button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.up_vote {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.up_vote:hover {
+  background-color: #218838;
+}
+
+.down_vote {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.down_vote:hover {
+  background-color: #c82333;
+}
+
+.delete {
+  background-color: #000;
+  color: #fff;
+}
+
+.delete:hover {
+  background-color: #5a6268;
 }
