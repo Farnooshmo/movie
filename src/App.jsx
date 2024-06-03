@@ -1,10 +1,8 @@
-import  { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
-
 import AddVideoForm from "./components/AddVideoForm";
 import Video from "./components/Video";
 import Header from "./components/Header";
-import './App.css';
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -17,11 +15,11 @@ const App = () => {
   const fetchVideos = async () => {
     try {
       const res = await fetch("https://movie-7cn3.onrender.com/videos");
-      
+
       if (!res.ok) {
         throw new Error("Failed to fetch videos");
       }
-      
+
       const data = await res.json();
       setVideos(data);
     } catch (err) {
@@ -110,8 +108,8 @@ const App = () => {
     <div className="app">
       <Header />
       <AddVideoForm onAddVideo={handleAddVideo} />
-    
-       {videos.map((video) => (
+      <div className="video_grid">
+        {videos.map((video) => (
           <Video
             key={video.id}
             title={video.title}
@@ -122,7 +120,7 @@ const App = () => {
             onRemove={() => handleRemoveVideo(video.id)}
           />
         ))}
-      
+      </div>
       <Footer />
     </div>
   );
