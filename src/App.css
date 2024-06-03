@@ -1,22 +1,51 @@
-/* Main app container */
-.app {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.app-header {
   text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-/* Header styles */
-.app-header h1 {
-  border-bottom: 4mm ridge rgba(225, 0, 0);
+h1 {
+  font-size: 2rem;
+  margin: 0;
 }
 
-@media screen and (width > 400px) {
-  .app {
-    background-color: #ececec;
+.video_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+  .video_grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .app-header h1 {
-    border-bottom: 2mm ridge rgba(225, 0, 0);
-    width: 100%;
+}
+
+@media (max-width: 768px) {
+  .video_grid {
+    grid-template-columns: 1fr;
   }
 }
