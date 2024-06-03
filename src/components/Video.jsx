@@ -25,7 +25,7 @@ className='iframe'
           💔
         </button>
         <button onClick={onRemove} className="delete" aria-label="Remove">
-          ␡
+          ❌
         </button>
       </div>
     </div>
