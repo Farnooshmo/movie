@@ -1,11 +1,11 @@
-
+import "./Footer.css";
 const Footer = () => {
     return (
-        <canvas className="footer_segmentation">
+        <div className="footer_segmentation">
         
-            <a target="_blank" href="https://icons8.com/icon/6Ujtt7adsfSb/film-projector">Film</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+            <a target="_blank" href="https://icons8.com/icon/6Ujtt7adsfSb/film-projector">Film icon</a> by <a target="_blank" href="https://icons8.com">Icons8</a>
         
-        </canvas>
+        </div>
     );
   };
   

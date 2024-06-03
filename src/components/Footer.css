@@ -1,0 +1,17 @@
+.footer_segmentation {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .footer_segmentation a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .footer_segmentation a:hover {
+    text-decoration: underline;
+  }
+  
