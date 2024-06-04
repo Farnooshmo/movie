@@ -1,16 +1,37 @@
-
 :root {
-  font-family: Roboto;
-  
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: #1d4160;
-  background-color: #f3ecf1;
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 20px;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --color-primary: #1d4160;
+  --color-background: #f3ecf1;
+  --color-card-bg: #f9f9f9;
+  --color-card-border: #e0e0e0;
+  --color-card-shadow: rgba(0, 0, 0, 0.1);
+  --border-radius: 10px;
 }
 
+@media (max-width: 992px) {
+  :root {
+    --font-size-base: 14px;
+    --font-size-small: 12px;
+    --font-size-large: 18px;
+  }
+}
 
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 12px;
+    --font-size-small: 10px;
+    --font-size-large: 16px;
+  }
+}
 
-
-
-
+@media (max-width: 480px) {
+  :root {
+    --font-size-base: 10px;
+    --font-size-small: 8px;
+    --font-size-large: 14px;
+  }
+}
