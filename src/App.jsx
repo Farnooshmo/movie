@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './App.css';
+import "./App.css";
 import AddVideoForm from "./components/AddVideoForm";
 import Video from "./components/Video";
 import Header from "./components/Header";
@@ -103,12 +103,11 @@ const App = () => {
       console.log("Error removing video:", err);
     }
   };
-
   return (
     <div className="app">
       <Header />
       <AddVideoForm onAddVideo={handleAddVideo} />
-      <div className="video_grid">
+      <div className="video-grid">
         {videos.map((video) => (
           <Video
             key={video.id}
