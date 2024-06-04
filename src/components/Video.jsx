@@ -18,6 +18,9 @@ const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
         </div>
         <div className="video-card-back">
           <h2 className="video-title">{title}</h2>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="video-link">
+            Watch Video
+          </a>
           <div>Liked: {rating}</div>
           <div className="votes-btn-wrap">
             <button onClick={onUpVote} className="up-vote" aria-label="Upvote">
