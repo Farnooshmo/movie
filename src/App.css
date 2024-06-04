@@ -23,17 +23,6 @@ body {
   align-items: center;
   padding: 20px;
 }
-
-.app-header {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-h1 {
-  font-size: 2rem;
-  margin: 0;
-}
 .video-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
