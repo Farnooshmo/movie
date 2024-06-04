@@ -1,46 +1,73 @@
-.video_wrapper {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+
+
+.video-card {
+  perspective: 1000px;
 }
 
-.video_title {
-  font-size: 1.5rem;
+.video-card-inner {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.video-card:hover .video-card-inner {
+  transform: rotateY(180deg);
+}
+
+.video-card-front,
+.video-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-card-front iframe,
+.video-card-back {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.video-card-back {
+  background-color: #f9f9f9;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.video-title {
+  font-size: 1.2rem;
   margin-bottom: 10px;
   color: #333;
 }
 
-.iframe {
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  border: none;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.iframe iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.votes_btn_wrap {
+.votes-btn-wrap {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
 
-.votes_btn_wrap button {
+.up-vote {
+  background-color: #28a745;
+  color: #fff;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -49,27 +76,34 @@
   transition: background-color 0.3s ease;
 }
 
-.up_vote {
-  background-color: #28a745;
-  color: #fff;
-}
-
-.up_vote:hover {
+.up-vote:hover {
   background-color: #218838;
 }
 
-.down_vote {
+.down-vote {
   background-color: #dc3545;
   color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.down_vote:hover {
+.down-vote:hover {
   background-color: #c82333;
 }
 
 .delete {
   background-color: #000;
   color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .delete:hover {
