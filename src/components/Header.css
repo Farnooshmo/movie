@@ -7,11 +7,11 @@
   }
 h1 {
     font-weight: 600;
+    color: #2772db;
 }
-h4 {
-    font-size: 1.5rem;
-    font-weight: 200;
-    background:linear-gradient(98.3deg, rgb(0, 0, 0) 10.6%, rgb(255, 0, 0) 97.7%);
+h3, h4 {
+    font-weight: 500;
+    background-color:#070f4e ;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   } 
