@@ -9,7 +9,7 @@ const App = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    console.log("API Endpoint:", import.meta.env.VITE_API_ENDPOINT); // Debug log
+    // console.log("API Endpoint:", import.meta.env.VITE_API_ENDPOINT); // Debug log
     fetchVideos();
   }, []);
 

@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 const serverPort = 4000;
 
-console.log("Database url:", process.env.DATABASE_URL)
+// console.log("Database url:", process.env.DATABASE_URL)
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
