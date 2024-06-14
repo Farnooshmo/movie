@@ -9,12 +9,13 @@ const App = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    console.log("API Endpoint:", import.meta.env.VITE_API_ENDPOINT); // Debug log
     fetchVideos();
   }, []);
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch("https://movie-7cn3.onrender.com/videos");
+      const res = await fetch(import.meta.env.VITE_API_ENDPOINT);
 
       if (!res.ok) {
         throw new Error("Failed to fetch videos");
@@ -29,16 +30,13 @@ const App = () => {
 
   const handleAddVideo = async (newVideo) => {
     try {
-      const res = await fetch(
-        "https://movie-7cn3.onrender.com/videos",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newVideo),
-        }
-      );
+      const res = await fetch(import.meta.env.VITE_API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      });
       const data = await res.json();
       setVideos((prevVideos) => [...prevVideos, data]);
     } catch (err) {
@@ -49,7 +47,7 @@ const App = () => {
   const handleUpVote = async (videoId) => {
     try {
       await fetch(
-        `https://movie-7cn3.onrender.com/videos/${videoId}/upvote`,
+        `${import.meta.env.VITE_API_ENDPOINT}/${videoId}/upvote`,
         {
           method: "PUT",
           headers: {
@@ -70,7 +68,7 @@ const App = () => {
   const handleDownVote = async (videoId) => {
     try {
       await fetch(
-        `https://movie-7cn3.onrender.com/videos/${videoId}/downvote`,
+        `${import.meta.env.VITE_API_ENDPOINT}/${videoId}/downvote`,
         {
           method: "PUT",
           headers: {
@@ -90,12 +88,9 @@ const App = () => {
 
   const handleRemoveVideo = async (videoId) => {
     try {
-      await fetch(
-        `https://movie-7cn3.onrender.com/videos/${videoId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/${videoId}`, {
+        method: "DELETE",
+      });
       setVideos((prevVideos) =>
         prevVideos.filter((video) => video.id !== videoId)
       );
@@ -103,6 +98,7 @@ const App = () => {
       console.log("Error removing video:", err);
     }
   };
+
   return (
     <div className="app">
       <Header />
