@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
   scroll-behavior: smooth;
   font-family: 'Roboto', sans-serif;
@@ -22,19 +23,25 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  overflow-x: hidden;
 }
+
 .video-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 20px;
+  max-width: 1200px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   flex-grow: 1;
   overflow-y: auto;
 }
+
 @media (max-width: 992px) {
   .video-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
