@@ -9,13 +9,12 @@ const App = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    // console.log("API Endpoint:", import.meta.env.VITE_API_ENDPOINT); // Debug log
     fetchVideos();
   }, []);
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch(import.meta.env.VITE_API_ENDPOINT);
+      const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/videos`);
 
       if (!res.ok) {
         throw new Error("Failed to fetch videos");
@@ -30,7 +29,7 @@ const App = () => {
 
   const handleAddVideo = async (newVideo) => {
     try {
-      const res = await fetch(import.meta.env.VITE_API_ENDPOINT, {
+      const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/videos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +46,7 @@ const App = () => {
   const handleUpVote = async (videoId) => {
     try {
       await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/${videoId}/upvote`,
+        `${import.meta.env.VITE_API_ENDPOINT}/videos/${videoId}/upvote`,
         {
           method: "PUT",
           headers: {
@@ -68,7 +67,7 @@ const App = () => {
   const handleDownVote = async (videoId) => {
     try {
       await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/${videoId}/downvote`,
+        `${import.meta.env.VITE_API_ENDPOINT}/videos/${videoId}/downvote`,
         {
           method: "PUT",
           headers: {
@@ -88,7 +87,7 @@ const App = () => {
 
   const handleRemoveVideo = async (videoId) => {
     try {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/${videoId}`, {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/videos/${videoId}`, {
         method: "DELETE",
       });
       setVideos((prevVideos) =>
