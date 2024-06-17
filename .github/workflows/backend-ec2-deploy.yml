@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies and Restart
         run: |
           ssh -i ~/.ssh/movie.pem -o StrictHostKeyChecking=no ubuntu@ec2-16-171-4-203.eu-north-1.compute.amazonaws.com << 'EOF'
-            cd movie/server
+            cd movie
             git pull
             npm install
             pm2 restart all
