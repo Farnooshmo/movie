@@ -34,10 +34,13 @@ jobs:
 
       - name: Test AWS Credentials
         run: aws sts get-caller-identity
-        
-      - name: List Files in Build Directory
+
+      - name: Debug Directory
         run: |
-          ls -l ./build
+         pwd
+         ls -l
+         ls -l ./build
+
       
       - name: Deploy to S3
         run: aws s3 sync ./build s3://myfirstawsbucketfarnoosh --delete
