@@ -12,8 +12,11 @@ jobs:
     env:
       VITE_API_ENDPOINT: ${{ secrets.VITE_API_ENDPOINT }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
 
@@ -23,12 +26,20 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug AWS Secrets
+        run: |
+          echo "AWS Access Key ID: ${AWS_ACCESS_KEY_ID:0:4}****"
+          echo "AWS Secret Access Key: ${AWS_SECRET_ACCESS_KEY:0:4}****"
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
+
+      - name: Test AWS Credentials
+        run: aws sts get-caller-identity
 
       - name: Deploy to S3
         run: aws s3 sync ./build s3://myfirstawsbucketfarnoosh --delete
