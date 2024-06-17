@@ -19,6 +19,10 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
 app.get("/videos", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM videos");
