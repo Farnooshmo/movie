@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: vite build
+        run: npm run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -43,4 +43,4 @@ jobs:
 
       
       - name: Deploy to S3
-        run: aws s3 sync ./build s3://myfirstawsbucketfarnoosh --delete
+        run: aws s3 sync ./dist s3://myfirstawsbucketfarnoosh --delete
