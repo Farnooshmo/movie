@@ -20,7 +20,7 @@ jobs:
           node-version: "20"
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -37,10 +37,9 @@ jobs:
 
       - name: Debug Directory
         run: |
-         pwd
-         ls -l
-         ls -l ./build
+          pwd
+          ls -l
+          ls -l ./dist
 
-      
       - name: Deploy to S3
         run: aws s3 sync ./dist s3://myfirstawsbucketfarnoosh --delete
