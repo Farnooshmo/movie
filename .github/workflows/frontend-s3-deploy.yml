@@ -2,13 +2,11 @@ name: Deploy Frontend to Amazon S3
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-    
   deploy:
     runs-on: ubuntu-latest
-    environment: production
     env:
       VITE_API_ENDPOINT: ${{ secrets.VITE_API_ENDPOINT }}
     steps:
@@ -41,6 +39,9 @@ jobs:
           pwd
           ls -l
           ls -l ./dist
+
+      - name: Echo Environment Variables
+        run: echo "VITE_API_ENDPOINT is $VITE_API_ENDPOINT"
 
       - name: Deploy to S3
         run: aws s3 sync ./dist s3://myfirstawsbucketfarnoosh --delete
