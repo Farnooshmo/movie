@@ -18,6 +18,11 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Debug Environment Variables
+        run: |
+          echo "VITE_API_ENDPOINT: $VITE_API_ENDPOINT"
+          env | grep VITE
+
       - name: Install Dependencies
         run: npm install
 
@@ -39,9 +44,6 @@ jobs:
           pwd
           ls -l
           ls -l ./dist
-
-      - name: Echo Environment Variables
-        run: echo "VITE_API_ENDPOINT is $VITE_API_ENDPOINT"
 
       - name: Deploy to S3
         run: aws s3 sync ./dist s3://myfirstawsbucketfarnoosh --delete
