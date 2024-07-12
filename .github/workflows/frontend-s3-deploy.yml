@@ -19,9 +19,7 @@ jobs:
           node-version: "20"
 
       - name: Debug Environment Variables
-        run: |
-          echo "VITE_API_ENDPOINT: $VITE_API_ENDPOINT"
-          env | grep VITE
+        run: echo "$VITE_API_ENDPOINT"
 
       - name: Install Dependencies
         run: npm install
