@@ -1,0 +1,5 @@
+# step: inatall docker on ec2
+# step: write yml file : build docker image/ push to docker hub/ ssh to ec2/pull docker image/ run the image
+# step: aws watch
+# terraform for s3
+# terraform for rds
