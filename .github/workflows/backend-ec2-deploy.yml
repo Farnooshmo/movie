@@ -1,29 +1,29 @@
-name: Deploy to Amazon EC2
+# name: Deploy to Amazon EC2
 
-on:
-  push:
-    branches: ["main"]
+# on:
+#   push:
+#     branches: ["main"]
 
-jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Create Private Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{secrets.MY_PRIVATE_KEY}}" > ~/.ssh/movie.pem
-          chmod 400 ~/.ssh/movie.pem
+#       - name: Create Private Key
+#         run: |
+#           mkdir -p ~/.ssh
+#           echo "${{secrets.MY_PRIVATE_KEY}}" > ~/.ssh/movie.pem
+#           chmod 400 ~/.ssh/movie.pem
 
-      - name: Install Dependencies and Restart
-        run: |
-          ssh -i ~/.ssh/movie.pem -o StrictHostKeyChecking=no ubuntu@ec2-16-171-4-203.eu-north-1.compute.amazonaws.com << 'EOF'
-            cd movie
-            git pull
-            npm install
-            pm2 restart all
-          EOF
+#       - name: Install Dependencies and Restart
+#         run: |
+#           ssh -i ~/.ssh/movie.pem -o StrictHostKeyChecking=no ubuntu@ec2-16-171-4-203.eu-north-1.compute.amazonaws.com << 'EOF'
+#             cd movie
+#             git pull
+#             npm install
+#             pm2 restart all
+#           EOF

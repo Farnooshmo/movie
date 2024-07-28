@@ -1,48 +1,48 @@
-name: Deploy Frontend to Amazon S3
+# name: Deploy Frontend to Amazon S3
 
-on:
-  push:
-    branches: ["main"]
+# on:
+#   push:
+#     branches: ["main"]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    environment: production
-    env:
-      VITE_API_ENDPOINT: ${{ vars.VITE_API_ENDPOINT }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     environment: production
+#     env:
+#       VITE_API_ENDPOINT: ${{ vars.VITE_API_ENDPOINT }}
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "20"
 
-      - name: Debug Environment Variables
-        run: echo "$VITE_API_ENDPOINT"
+#       - name: Debug Environment Variables
+#         run: echo "$VITE_API_ENDPOINT"
 
-      - name: Install Dependencies
-        run: npm install
+#       - name: Install Dependencies
+#         run: npm install
 
-      - name: Build
-        run: npm run build
+#       - name: Build
+#         run: npm run build
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v3
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: eu-north-1
 
-      - name: Test AWS Credentials
-        run: aws sts get-caller-identity
+#       - name: Test AWS Credentials
+#         run: aws sts get-caller-identity
 
-      - name: Debug Directory
-        run: |
-          pwd
-          ls -l
-          ls -l ./dist
+#       - name: Debug Directory
+#         run: |
+#           pwd
+#           ls -l
+#           ls -l ./dist
 
-      - name: Deploy to S3
-        run: aws s3 sync ./dist s3://myfirstawsbucketfarnoosh --delete
+#       - name: Deploy to S3
+#         run: aws s3 sync ./dist s3://myfirstawsbucketfarnoosh --delete
