@@ -15,6 +15,8 @@ const App = () => {
   const fetchVideos = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/videos`);
+      // console.log('API Endpoint:', import.meta.env.VITE_API_ENDPOINT);
+
 
       if (!res.ok) {
         throw new Error("Failed to fetch videos");

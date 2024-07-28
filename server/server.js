@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-const express = require('express');
-const cors = require('cors');
-const { Pool } = require('pg');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const { Pool } = require("pg");
+require("dotenv").config();
 
 const app = express();
 const serverPort = 4000;
@@ -12,16 +12,16 @@ const serverPort = 4000;
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false // Only if SSL validation is required
-  }
+    rejectUnauthorized: false, // Only if SSL validation is required
+  },
 });
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello World');
+// });
 
 app.get("/videos", async (req, res) => {
   try {
@@ -46,14 +46,18 @@ app.post("/videos", async (req, res) => {
     res.status(201).json(rows[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Something went wrong. Please try again later." });
+    res
+      .status(500)
+      .json({ error: "Something went wrong. Please try again later." });
   }
 });
 
 app.get("/videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
+    const { rows } = await pool.query("SELECT * FROM videos WHERE id = $1", [
+      id,
+    ]);
     if (rows.length === 0) {
       res.status(404).json({ result: "failure", message: "Video not found" });
     } else {
@@ -61,7 +65,9 @@ app.get("/videos/:id", async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ result: "failure", message: "Error retrieving video" });
+    res
+      .status(500)
+      .json({ result: "failure", message: "Error retrieving video" });
   }
 });
 
@@ -72,7 +78,9 @@ app.delete("/videos/:id", async (req, res) => {
     res.json({ result: "success", message: "Video deleted" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ result: "failure", message: "Video could not be deleted" });
+    res
+      .status(500)
+      .json({ result: "failure", message: "Video could not be deleted" });
   }
 });
 
@@ -86,7 +94,9 @@ app.put("/videos/:id/upvote", async (req, res) => {
     res.json(rows[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ result: "failure", message: "Video could not be upvoted" });
+    res
+      .status(500)
+      .json({ result: "failure", message: "Video could not be upvoted" });
   }
 });
 
@@ -100,7 +110,9 @@ app.put("/videos/:id/downvote", async (req, res) => {
     res.json(rows[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ result: "failure", message: "Video could not be downvoted" });
+    res
+      .status(500)
+      .json({ result: "failure", message: "Video could not be downvoted" });
   }
 });
 
