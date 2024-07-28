@@ -1,0 +1,19 @@
+# Exclude node_modules directory
+node_modules
+
+# Exclude development files and directories
+.git
+.gitignore
+.vscode
+.eslint*
+*.log
+
+# Exclude environment-specific files
+server/.env
+.env
+
+# Exclude Dockerfile (if necessary)
+# Dockerfile
+
+# Exclude other unnecessary files
+README.md
